@@ -18,7 +18,7 @@ export const { auth } = NextAuth({
                 email: { label: "Email", type: "email" },
                 password: { label: "Password", type: "password" },
             },
-            authorize: async (credentials) => {
+            authorize: async () => {
                 // В middleware мы не можем использовать Prisma
                 // Поэтому просто возвращаем null для авторизации
                 // Реальная авторизация будет происходить в API routes
