@@ -7,16 +7,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     session: { strategy: 'jwt' },
     callbacks: {
         async session({ session, token }) {
-            if (session.user && token.sub) {
-                session.user.id = token.sub
+            if (session.user) {
+                session.user.id = token.sub as string
             }
             return session
-        },
-        async jwt({ token, user }) {
-            if (user) {
-                token.sub = user.id
-            }
-            return token
         },
     },
     providers: [
@@ -46,9 +40,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
                     return {
                         id: user.id,
-                        name: user.name,
-                        email: user.email,
-                        image: user.image,
+                        name: user.name ?? undefined,
+                        email: user.email ?? undefined,
+                        image: user.image ?? undefined,
                     }
                 } catch (error) {
                     console.error("Auth error:", error)
