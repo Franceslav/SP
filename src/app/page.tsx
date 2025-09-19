@@ -1,103 +1,53 @@
-import Image from "next/image";
+import Link from "next/link"
+import { CalendarPlus } from "lucide-react"
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+import AnimatedGridPattern from "@/components/ui/animated-grid-pattern"
+import { buttonVariants } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+import { cn } from "@/lib/utils"
+import Container from "@/components/container"
+
+
+const Home = () => {
+
+    return (
+        <div className="flex-1">
+            <Container>
+                <main className="flex flex-col items-center px-4 pb-4 pt-16 bg-stone-200/60 rounded-3xl shadow gap-10 overflow-hidden relative">
+                    <div className="w-full flex items-center justify-center relative">
+                        <div className="max-w-md md:max-w-xl flex flex-col items-center gap-6 z-10">
+                            <Badge variant='outline' className="flex items-center shadow backdrop-blur-sm bg-white/50 gap-2 py-1 rounded-full">
+                                <CalendarPlus className="size-4" />
+                                <span>South Park &bull; Season 26</span>
+                            </Badge>
+                            <h1 className="text-5xl md:text-6xl font-semibold text-center">
+                                Добро пожаловать в <span className="text-primary">Южный парк</span>
+                            </h1>
+                            <p className="text-sm md:text-base font-medium text-center max-w-xs md:max-w-sm">Присоединяйтесь к Стену, Кайлу, Картману и Кенни в их безумных приключениях в маленьком городке Колорадо.</p>
+                            <Link href='/gallery' className={cn("w-full max-w-40 font-normal mt-3", buttonVariants({ variant: "default", className: "bg-foreground" }))}>
+                                <span>Смотреть серии</span>
+                            </Link>
+                        </div>
+                        <AnimatedGridPattern
+                            numSquares={30}
+                            maxOpacity={0.1}
+                            duration={1}
+                            repeatDelay={1}
+                            className={cn(
+                                "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]",
+                                "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12 z-0",
+                            )}
+                        />
+                    </div>
+                    <picture className="border rounded-sm md:rounded-2xl overflow-hidden shadow z-10">
+                        <source srcSet='/assets/hero.png' type="image/webp" />
+                        <img src='/assets/hero.png' alt="hero-demo" className="object-cover object-center rounded-sm md:rounded-2xl" />
+                    </picture>
+                </main>
+            </Container>
+        </div >
+    )
 }
+
+export default Home
