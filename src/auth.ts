@@ -1,12 +1,16 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
+import { MongoDBAdapter } from "@auth/mongodb-adapter"
+import clientPromise from "@/lib/mongodb"
 import { prisma } from "@/config/prisma";
 import bcrypt from "bcryptjs";
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
-    session: { strategy: 'jwt' },
+export const authOptions = {
+    adapter: MongoDBAdapter(clientPromise),
+    secret: process.env.AUTH_SECRET,
+    session: { strategy: 'jwt' as const },
     callbacks: {
-        async session({ session, token }) {
+        async session({ session, token }: { session: any, token: any }) {
             if (session.user) {
                 session.user.id = token.sub as string
             }
@@ -51,4 +55,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             },
         }),
     ],
-})
+}
+
+export const { handlers, signIn, signOut, auth } = NextAuth(authOptions)
