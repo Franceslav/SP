@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import type { Session, User } from "next-auth"
 import type { JWT } from "next-auth/jwt"
 
-// Временная конфигурация без MongoDB адаптера для решения проблем с подключением
+// Временная конфигурация без MongoDB адаптера для тестирования
 export const authOptions = {
     secret: process.env.AUTH_SECRET,
     session: { strategy: 'jwt' as const },

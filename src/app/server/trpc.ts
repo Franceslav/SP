@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { cache } from "react";
 
 import { initTRPC } from "@trpc/server";
-import { prisma } from "@/config/prisma";
+import { prisma } from "@/config/prisma-simple";
 import superjson from "superjson";
 
 type Context = {
