@@ -5,9 +5,22 @@ if (!process.env.DATABASE_URL) {
 }
 
 const uri = process.env.DATABASE_URL
-const options = {}
+const options = {
+  maxPoolSize: 10, // Поддерживать до 10 сокетов
+  serverSelectionTimeoutMS: 5000, // Пытаться подключиться 5 секунд
+  socketTimeoutMS: 45000, // Закрывать сокеты через 45 секунд неактивности
+  bufferMaxEntries: 0, // Отключить буферизацию
+  retryWrites: true,
+  retryReads: true,
+  // Настройки для Vercel
+  connectTimeoutMS: 10000,
+  maxIdleTimeMS: 30000,
+  // Настройки для MongoDB Atlas
+  ssl: true,
+  authSource: 'admin',
+}
 
-let client
+let client: MongoClient
 let clientPromise: Promise<MongoClient>
 
 if (process.env.NODE_ENV === 'development') {

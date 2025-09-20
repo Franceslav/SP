@@ -1,7 +1,7 @@
 import NextAuth from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
-import clientPromise from "@/lib/mongodb"
+import clientPromise from "@/lib/mongodb-retry"
 import { prisma } from "@/config/prisma";
 import bcrypt from "bcryptjs";
 
